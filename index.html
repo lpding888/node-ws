@@ -1,722 +1,1006 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StyleAI Pro - 高端服装AI视觉解决方案</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1A2B48', // 深高级蓝
+            secondary: '#7B89A8', // 低饱和灰蓝
+            accent: '#D4AF37', // 香槟金（点缀色）
+            neutral: '#F8F9FA', // 米白背景
+            'neutral-dark': '#2C3E50', // 深灰文字
+            'neutral-light': '#E9ECEF', // 浅灰分隔
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+          },
+          boxShadow: {
+            'soft': '0 4px 20px rgba(0, 0, 0, 0.03)',
+            'hover': '0 8px 30px rgba(0, 0, 0, 0.06)',
+          }
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-balance {
+        text-wrap: balance;
+      }
+      .bg-blur {
+        backdrop-filter: blur(8px);
+      }
+      .gradient-mask {
+        mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+      }
+      .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .hover-lift:hover {
+        transform: translateY(-4px);
+      }
+    }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
+
+<body class="font-inter text-neutral-dark bg-neutral antialiased">
+  <!-- 导航栏（高级悬浮效果） -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 bg-transparent">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+      <div class="flex justify-between items-center py-6">
+        <div class="flex items-center">
+          <a href="#" class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+              <i class="fa fa-diamond text-white text-xl"></i>
             </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+            <span class="text-2xl font-montserrat font-bold text-white">StyleAI Pro</span>
+          </a>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex items-center space-x-10">
+          <a href="#features" class="text-white hover:text-accent transition-colors font-medium text-sm tracking-wider">功能</a>
+          <a href="#showcase" class="text-white hover:text-accent transition-colors font-medium text-sm tracking-wider">案例</a>
+          <a href="#process" class="text-white hover:text-accent transition-colors font-medium text-sm tracking-wider">流程</a>
+          <a href="#pricing" class="text-white hover:text-accent transition-colors font-medium text-sm tracking-wider">定价</a>
+          <a href="#faq" class="text-white hover:text-accent transition-colors font-medium text-sm tracking-wider">帮助</a>
+        </nav>
+        
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="#" class="px-5 py-2 text-white hover:text-accent transition-colors font-medium text-sm">登录</a>
+          <a href="#" class="px-6 py-2 bg-accent/90 text-white rounded-lg hover:bg-accent transition-colors font-medium text-sm shadow-soft hover:shadow-hover">
+            免费试用
+          </a>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <button id="menu-toggle" class="md:hidden text-white text-2xl">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white/95 bg-blur absolute w-full shadow-soft">
+      <div class="container mx-auto px-6 py-4 space-y-4">
+        <a href="#features" class="block py-3 text-neutral-dark hover:text-accent transition-colors font-medium text-sm">功能</a>
+        <a href="#showcase" class="block py-3 text-neutral-dark hover:text-accent transition-colors font-medium text-sm">案例</a>
+        <a href="#process" class="block py-3 text-neutral-dark hover:text-accent transition-colors font-medium text-sm">流程</a>
+        <a href="#pricing" class="block py-3 text-neutral-dark hover:text-accent transition-colors font-medium text-sm">定价</a>
+        <a href="#faq" class="block py-3 text-neutral-dark hover:text-accent transition-colors font-medium text-sm">帮助</a>
+        <div class="flex space-x-4 pt-4 border-t border-neutral-light">
+          <a href="#" class="flex-1 px-5 py-2 text-primary hover:text-accent transition-colors font-medium text-sm text-center">登录</a>
+          <a href="#" class="flex-1 px-5 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors font-medium text-sm text-center">免费试用</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </header>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+  <!-- 英雄区域（高级全屏视觉） -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="https://picsum.photos/id/1059/1920/1080" alt="高端服装背景" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-primary/70"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 md:px-12 lg:px-16 relative z-10 text-center">
+      <h1 class="text-[clamp(2.8rem,6vw,4.2rem)] font-montserrat font-bold text-white leading-tight mb-6 text-balance">
+        重新定义服装<br class="hidden sm:block">视觉内容创作
+      </h1>
+      <p class="text-[clamp(1rem,2vw,1.2rem)] text-white/90 max-w-2xl mx-auto mb-12 font-light">
+        以AI驱动的一站式视觉解决方案，为高端服装品牌提供高效、精致的生图与带货视频服务
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-5">
+        <a href="#" class="w-full sm:w-auto px-8 py-3.5 bg-accent text-white rounded-lg text-base font-medium hover:bg-accent/90 transition-all shadow-soft hover:shadow-hover">
+          立即体验 <i class="fa fa-arrow-right ml-2"></i>
+        </a>
+        <a href="#" class="w-full sm:w-auto px-8 py-3.5 bg-white/10 bg-blur text-white rounded-lg text-base font-medium hover:bg-white/20 transition-all border border-white/20 flex items-center justify-center">
+          <i class="fa fa-play-circle mr-2"></i> 观看演示
+        </a>
+      </div>
+      
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/80 animate-bounce">
+        <a href="#features" class="flex flex-col items-center">
+          <span class="mb-2 text-xs font-medium tracking-widest">探索更多</span>
+          <i class="fa fa-chevron-down text-sm"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 功能亮点（高级卡片设计） -->
+  <section id="features" class="py-24 bg-white">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center max-w-2xl mx-auto mb-18">
+        <span class="inline-block px-4 py-1.5 bg-primary/5 text-primary rounded-full text-xs font-medium mb-5 tracking-wider">核心功能</span>
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-montserrat font-bold text-neutral-dark mb-6">AI赋能的专业级工具</h2>
+        <p class="text-secondary text-lg font-light">为服装行业量身打造，覆盖从设计到营销的全流程视觉需求</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 功能卡片1 -->
+        <div class="bg-neutral rounded-2xl p-8 shadow-soft hover:shadow-hover hover-lift">
+          <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
+            <i class="fa fa-image text-primary text-xl"></i>
+          </div>
+          <h3 class="text-xl font-montserrat font-semibold mb-4">AI智能生图</h3>
+          <p class="text-secondary mb-6 font-light">根据文字描述生成高清服装图片，支持多种风格、场景定制，还原设计细节</p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>8K超高清渲染</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>品牌风格适配</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>虚拟试衣预览</span>
+            </li>
+          </ul>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+        
+        <!-- 功能卡片2 -->
+        <div class="bg-neutral rounded-2xl p-8 shadow-soft hover:shadow-hover hover-lift">
+          <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
+            <i class="fa fa-video-camera text-primary text-xl"></i>
+          </div>
+          <h3 class="text-xl font-montserrat font-semibold mb-4">带货视频生成</h3>
+          <p class="text-secondary mb-6 font-light">自动转化服装图片为专业带货视频，智能匹配音乐、字幕与动态效果</p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>多平台适配模板</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>AI智能配音</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>1080P高清输出</span>
+            </li>
+          </ul>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+        
+        <!-- 功能卡片3 -->
+        <div class="bg-neutral rounded-2xl p-8 shadow-soft hover:shadow-hover hover-lift">
+          <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
+            <i class="fa fa-magic text-primary text-xl"></i>
+          </div>
+          <h3 class="text-xl font-montserrat font-semibold mb-4">智能编辑工具</h3>
+          <p class="text-secondary mb-6 font-light">AI辅助优化服装图片，精准调整背景、光线与细节，提升高级感</p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>智能背景替换</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>色彩校准优化</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>批量高效处理</span>
+            </li>
+          </ul>
         </div>
-    </footer>
+        
+        <!-- 功能卡片4 -->
+        <div class="bg-neutral rounded-2xl p-8 shadow-soft hover:shadow-hover hover-lift">
+          <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
+            <i class="fa fa-users text-primary text-xl"></i>
+          </div>
+          <h3 class="text-xl font-montserrat font-semibold mb-4">虚拟模特展示</h3>
+          <p class="text-secondary mb-6 font-light">多样化虚拟模特库，支持多风格、多场景展示，降低拍摄成本</p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>30+风格模特选择</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>动态姿势生成</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>定制化场景适配</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 功能卡片5 -->
+        <div class="bg-neutral rounded-2xl p-8 shadow-soft hover:shadow-hover hover-lift">
+          <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
+            <i class="fa fa-shopping-bag text-primary text-xl"></i>
+          </div>
+          <h3 class="text-xl font-montserrat font-semibold mb-4">电商素材适配</h3>
+          <p class="text-secondary mb-6 font-light">一键生成符合各大平台规范的素材，自动适配尺寸与格式要求</p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>全平台尺寸预设</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>营销文案智能生成</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>模板化批量应用</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- 功能卡片6 -->
+        <div class="bg-neutral rounded-2xl p-8 shadow-soft hover:shadow-hover hover-lift">
+          <div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
+            <i class="fa fa-bar-chart text-primary text-xl"></i>
+          </div>
+          <h3 class="text-xl font-montserrat font-semibold mb-4">数据洞察分析</h3>
+          <p class="text-secondary mb-6 font-light">分析视觉内容效果，提供数据驱动的优化建议，提升转化效率</p>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>素材效果追踪</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>用户偏好分析</span>
+            </li>
+            <li class="flex items-center text-secondary text-sm">
+              <i class="fa fa-check text-primary mr-2"></i>
+              <span>智能优化建议</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  <!-- 案例展示（高级画廊风格） -->
+  <section id="showcase" class="py-24 bg-neutral">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center max-w-2xl mx-auto mb-18">
+        <span class="inline-block px-4 py-1.5 bg-primary/5 text-primary rounded-full text-xs font-medium mb-5 tracking-wider">成功案例</span>
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-montserrat font-bold text-neutral-dark mb-6">高端视觉作品展示</h2>
+        <p class="text-secondary text-lg font-light">AI技术与服装美学的完美融合，助力品牌打造差异化视觉体验</p>
+      </div>
+      
+      <div class="mb-12 flex flex-wrap justify-center gap-4">
+        <button class="px-5 py-2 bg-primary text-white rounded-full text-xs font-medium tracking-wider">全部作品</button>
+        <button class="px-5 py-2 bg-white text-secondary rounded-full text-xs font-medium tracking-wider hover:bg-primary/5 transition-colors">AI生图</button>
+        <button class="px-5 py-2 bg-white text-secondary rounded-full text-xs font-medium tracking-wider hover:bg-primary/5 transition-colors">带货视频</button>
+        <button class="px-5 py-2 bg-white text-secondary rounded-full text-xs font-medium tracking-wider hover:bg-primary/5 transition-colors">虚拟模特</button>
+        <button class="px-5 py-2 bg-white text-secondary rounded-full text-xs font-medium tracking-wider hover:bg-primary/5 transition-colors">电商素材</button>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 案例1 -->
+        <div class="group relative rounded-xl overflow-hidden shadow-soft hover:shadow-hover hover-lift">
+          <img src="https://picsum.photos/id/325/600/800" alt="高端服装AI生成案例" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+            <h3 class="text-white font-montserrat font-semibold text-xl mb-2">夏季高定连衣裙系列</h3>
+            <p class="text-white/80 text-sm mb-4 font-light">AI生成高定系列视觉，还原面料质感与剪裁细节</p>
+            <span class="inline-block px-3 py-1 bg-accent/90 text-white rounded-full text-xs font-medium">AI生图</span>
+          </div>
+        </div>
+        
+        <!-- 案例2 -->
+        <div class="group relative rounded-xl overflow-hidden shadow-soft hover:shadow-hover hover-lift">
+          <img src="https://picsum.photos/id/334/600/800" alt="高端服装AI生成案例" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+            <h3 class="text-white font-montserrat font-semibold text-xl mb-2">男士轻奢休闲系列</h3>
+            <p class="text-white/80 text-sm mb-4 font-light">虚拟模特动态展示，提升品牌高端形象</p>
+            <span class="inline-block px-3 py-1 bg-accent/90 text-white rounded-full text-xs font-medium">虚拟模特</span>
+          </div>
+        </div>
+        
+        <!-- 案例3 -->
+        <div class="group relative rounded-xl overflow-hidden shadow-soft hover:shadow-hover hover-lift">
+          <img src="https://picsum.photos/id/342/600/800" alt="高端服装AI生成案例" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+            <h3 class="text-white font-montserrat font-semibold text-xl mb-2">运动轻奢服饰系列</h3>
+            <p class="text-white/80 text-sm mb-4 font-light">AI动态视频，突出功能性与设计感</p>
+            <span class="inline-block px-3 py-1 bg-accent/90 text-white rounded-full text-xs font-medium">带货视频</span>
+          </div>
+        </div>
+        
+        <!-- 案例4 -->
+        <div class="group relative rounded-xl overflow-hidden shadow-soft hover:shadow-hover hover-lift">
+          <img src="https://picsum.photos/id/349/600/800" alt="高端服装AI生成案例" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+            <h3 class="text-white font-montserrat font-semibold text-xl mb-2">高端童装定制系列</h3>
+            <p class="text-white/80 text-sm mb-4 font-light">多平台素材统一风格，提升品牌辨识度</p>
+            <span class="inline-block px-3 py-1 bg-accent/90 text-white rounded-full text-xs font-medium">电商素材</span>
+          </div>
+        </div>
+        
+        <!-- 案例5 -->
+        <div class="group relative rounded-xl overflow-hidden shadow-soft hover:shadow-hover hover-lift">
+          <img src="https://picsum.photos/id/328/600/800" alt="高端服装AI生成案例" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+            <h3 class="text-white font-montserrat font-semibold text-xl mb-2">秋季风衣高定系列</h3>
+            <p class="text-white/80 text-sm mb-4 font-light">AI还原面料肌理，呈现高级质感</p>
+            <span class="inline-block px-3 py-1 bg-accent/90 text-white rounded-full text-xs font-medium">AI生图</span>
+          </div>
+        </div>
+        
+        <!-- 案例6 -->
+        <div class="group relative rounded-xl overflow-hidden shadow-soft hover:shadow-hover hover-lift">
+          <img src="https://picsum.photos/id/338/600/800" alt="高端服装AI生成案例" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+            <h3 class="text-white font-montserrat font-semibold text-xl mb-2">奢华配饰系列</h3>
+            <p class="text-white/80 text-sm mb-4 font-light">短视频突出细节，提升购买转化率</p>
+            <span class="inline-block px-3 py-1 bg-accent/90 text-white rounded-full text-xs font-medium">带货视频</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-16">
+        <a href="#" class="inline-flex items-center px-7 py-3 bg-white text-primary font-medium rounded-lg shadow-soft hover:shadow-hover transition-all border border-primary/10 text-sm">
+          查看更多案例 <i class="fa fa-long-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
+  <!-- 使用流程（高级简约步骤） -->
+  <section id="process" class="py-24 bg-white">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center max-w-2xl mx-auto mb-18">
+        <span class="inline-block px-4 py-1.5 bg-primary/5 text-primary rounded-full text-xs font-medium mb-5 tracking-wider">操作流程</span>
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-montserrat font-bold text-neutral-dark mb-6">三步生成高级视觉内容</h2>
+        <p class="text-secondary text-lg font-light">无需专业技能，简单操作即可获得符合高端品牌调性的视觉素材</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+        <!-- 连接线 - 仅在中等屏幕以上显示 -->
+        <div class="hidden md:block absolute top-1/4 left-0 w-full h-0.5 bg-neutral-light -translate-y-1/2 z-0"></div>
+        
+        <!-- 步骤1 -->
+        <div class="relative z-10 text-center">
+          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-montserrat font-bold mx-auto mb-8 shadow-soft">
+            01
+          </div>
+          <h3 class="text-xl font-montserrat font-semibold mb-4">定义需求</h3>
+          <p class="text-secondary font-light mb-6">上传服装图片或输入文字描述，明确风格、场景与应用需求</p>
+          <div class="bg-neutral rounded-xl p-4 shadow-soft">
+            <img src="https://picsum.photos/id/0/300/200" alt="需求定义示例" class="rounded-lg w-full h-48 object-cover mx-auto">
+          </div>
+        </div>
+        
+        <!-- 步骤2 -->
+        <div class="relative z-10 text-center">
+          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-montserrat font-bold mx-auto mb-8 shadow-soft">
+            02
+          </div>
+          <h3 class="text-xl font-montserrat font-semibold mb-4">AI智能生成</h3>
+          <p class="text-secondary font-light mb-6">AI系统快速处理，生成多版本高质量视觉内容供选择</p>
+          <div class="bg-neutral rounded-xl p-4 shadow-soft">
+            <img src="https://picsum.photos/id/1/300/200" alt="AI生成示例" class="rounded-lg w-full h-48 object-cover mx-auto">
+          </div>
+        </div>
+        
+        <!-- 步骤3 -->
+        <div class="relative z-10 text-center">
+          <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-montserrat font-bold mx-auto mb-8 shadow-soft">
+            03
+          </div>
+          <h3 class="text-xl font-montserrat font-semibold mb-4">优化导出</h3>
+          <p class="text-secondary font-light mb-6">微调细节，选择适配格式，一键导出用于多渠道展示</p>
+          <div class="bg-neutral rounded-xl p-4 shadow-soft">
+            <img src="https://picsum.photos/id/2/300/200" alt="优化导出示例" class="rounded-lg w-full h-48 object-cover mx-auto">
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-20 bg-neutral rounded-2xl p-8 md:p-12">
+        <div class="flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12">
+            <h3 class="text-2xl font-montserrat font-semibold mb-5">体验AI生成的高级质感</h3>
+            <p class="text-secondary font-light mb-8">上传一张服装图片或输入文字描述，即刻体验智能生成的高效与创意，感受AI带来的视觉升级</p>
+            <a href="#" class="inline-flex items-center px-7 py-3.5 bg-primary text-white font-medium rounded-lg shadow-soft hover:shadow-hover transition-all text-sm">
+              开始免费试用 <i class="fa fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+          <div class="md:w-1/2">
+            <div class="bg-white p-6 rounded-xl shadow-soft">
+              <div class="mb-5">
+                <label for="prompt" class="block text-sm font-medium text-neutral-dark mb-3">输入您的需求描述</label>
+                <textarea id="prompt" rows="3" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors bg-neutral" placeholder="例如：生成高端西装外套图片，简约风格，工作室背景，突出面料质感..."></textarea>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-4">
+                <button class="flex-1 py-3 bg-neutral text-secondary rounded-lg font-medium hover:bg-neutral-light transition-colors flex items-center justify-center text-sm">
+                  <i class="fa fa-upload mr-2"></i> 上传参考图
+                </button>
+                <button class="flex-1 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors text-sm">
+                  生成高级内容
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数据统计（高级简约风格） -->
+  <section class="py-16 bg-primary text-white">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-4xl md:text-5xl font-montserrat font-bold mb-3" id="counter1">0</div>
+          <p class="text-white/80 text-sm font-light tracking-wider">合作高端品牌</p>
+        </div>
+        <div>
+          <div class="text-4xl md:text-5xl font-montserrat font-bold mb-3" id="counter2">0</div>
+          <p class="text-white/80 text-sm font-light tracking-wider">AI生成图片</p>
+        </div>
+        <div>
+          <div class="text-4xl md:text-5xl font-montserrat font-bold mb-3" id="counter3">0</div>
+          <p class="text-white/80 text-sm font-light tracking-wider">带货视频</p>
+        </div>
+        <div>
+          <div class="text-4xl md:text-5xl font-montserrat font-bold mb-3" id="counter4">0</div>
+          <p class="text-white/80 text-sm font-light tracking-wider">客户满意度</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 定价方案（高级质感） -->
+  <section id="pricing" class="py-24 bg-neutral">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center max-w-2xl mx-auto mb-18">
+        <span class="inline-block px-4 py-1.5 bg-primary/5 text-primary rounded-full text-xs font-medium mb-5 tracking-wider">定价方案</span>
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-montserrat font-bold text-neutral-dark mb-6">选择适合您的合作模式</h2>
+        <p class="text-secondary text-lg font-light">为不同规模的服装品牌提供灵活、高效的解决方案</p>
+        
+        <div class="flex items-center justify-center mt-10 bg-white p-1 rounded-full inline-block shadow-soft">
+          <button class="px-7 py-2.5 rounded-full text-sm font-medium bg-primary text-white">按月付费</button>
+          <button class="px-7 py-2.5 rounded-full text-sm font-medium text-secondary hover:text-primary transition-colors">按年付费 <span class="text-xs bg-accent/10 text-accent px-2 py-0.5 rounded ml-1">省25%</span></button>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 基础版 -->
+        <div class="bg-white rounded-2xl shadow-soft hover:shadow-hover hover-lift overflow-hidden">
+          <div class="p-8">
+            <h3 class="text-xl font-montserrat font-semibold mb-3">基础版</h3>
+            <p class="text-secondary text-sm font-light mb-6">适合独立设计师与初创品牌</p>
+            <div class="mb-8">
+              <span class="text-4xl font-montserrat font-bold">¥299</span>
+              <span class="text-secondary">/月</span>
+            </div>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">每月150张AI生成图片</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">每月15个短视频生成</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">基础编辑工具集</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">5种虚拟模特选择</span>
+              </li>
+              <li class="flex items-start text-secondary/70">
+                <i class="fa fa-times mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">批量处理功能</span>
+              </li>
+              <li class="flex items-start text-secondary/70">
+                <i class="fa fa-times mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">定制化平台适配</span>
+              </li>
+              <li class="flex items-start text-secondary/70">
+                <i class="fa fa-times mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">专属客户经理</span>
+              </li>
+            </ul>
+            <a href="#" class="block w-full py-3 text-center border border-primary text-primary font-medium rounded-lg hover:bg-primary/5 transition-colors text-sm">
+              选择基础版
+            </a>
+          </div>
+        </div>
+        
+        <!-- 专业版 -->
+        <div class="bg-white rounded-2xl shadow-hover hover-lift overflow-hidden transform scale-105 z-10 border-2 border-primary/20">
+          <div class="bg-primary/10 text-primary text-center py-2 text-sm font-medium">
+            最受欢迎
+          </div>
+          <div class="p-8">
+            <h3 class="text-xl font-montserrat font-semibold mb-3">专业版</h3>
+            <p class="text-secondary text-sm font-light mb-6">适合成长型服装品牌</p>
+            <div class="mb-8">
+              <span class="text-4xl font-montserrat font-bold">¥899</span>
+              <span class="text-secondary">/月</span>
+            </div>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">每月800张AI生成图片</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">每月80个短视频生成</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">高级编辑工具集</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">20种虚拟模特选择</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">高级批量处理</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">全平台定制适配</span>
+              </li>
+              <li class="flex items-start text-secondary/70">
+                <i class="fa fa-times mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">专属客户经理</span>
+              </li>
+            </ul>
+            <a href="#" class="block w-full py-3 text-center bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors shadow-soft text-sm">
+              选择专业版
+            </a>
+          </div>
+        </div>
+        
+        <!-- 企业版 -->
+        <div class="bg-white rounded-2xl shadow-soft hover:shadow-hover hover-lift overflow-hidden">
+          <div class="p-8">
+            <h3 class="text-xl font-montserrat font-semibold mb-3">企业版</h3>
+            <p class="text-secondary text-sm font-light mb-6">适合高端服装企业与连锁品牌</p>
+            <div class="mb-8">
+              <span class="text-4xl font-montserrat font-bold">¥2999</span>
+              <span class="text-secondary">/月</span>
+            </div>
+            <ul class="space-y-4 mb-10">
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">每月3000张AI生成图片</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">每月300个短视频生成</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">全套专业编辑工具</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">无限虚拟模特使用</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">高级批量处理系统</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">定制化平台适配服务</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-primary mt-1 mr-3"></i>
+                <span class="text-secondary text-sm">专属客户经理对接</span>
+              </li>
+            </ul>
+            <a href="#" class="block w-full py-3 text-center border border-primary text-primary font-medium rounded-lg hover:bg-primary/5 transition-colors text-sm">
+              联系销售
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-16 text-center">
+        <p class="text-secondary font-light mb-6">需要更灵活的定制化解决方案？</p>
+        <a href="#" class="inline-flex items-center px-7 py-3 bg-white text-primary font-medium rounded-lg shadow-soft hover:shadow-hover transition-all border border-primary/10 text-sm">
+          咨询定制方案 <i class="fa fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 客户评价（高级简约风格） -->
+  <section class="py-24 bg-white">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center max-w-2xl mx-auto mb-18">
+        <span class="inline-block px-4 py-1.5 bg-primary/5 text-primary rounded-full text-xs font-medium mb-5 tracking-wider">客户反馈</span>
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-montserrat font-bold text-neutral-dark mb-6">品牌客户的真实评价</h2>
+        <p class="text-secondary text-lg font-light">来自高端服装品牌的使用体验与认可</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 评价1 -->
+        <div class="bg-neutral rounded-2xl p-8 shadow-soft hover:shadow-hover hover-lift">
+          <div class="text-accent mb-6">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <p class="text-secondary font-light mb-8">"StyleAI Pro的生成效果超出预期，AI精准还原了我们品牌的高端调性，大大降低了我们的视觉制作成本，同时提升了内容质量。"</p>
+          <div class="flex items-center">
+            <img src="https://picsum.photos/id/64/100/100" alt="客户头像" class="w-14 h-14 rounded-full object-cover mr-5">
+            <div>
+              <h4 class="font-montserrat font-semibold">张女士</h4>
+              <p class="text-secondary text-sm font-light">高端女装品牌创始人</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 评价2 -->
+        <div class="bg-neutral rounded-2xl p-8 shadow-soft hover:shadow-hover hover-lift">
+          <div class="text-accent mb-6">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+          </div>
+          <p class="text-secondary font-light mb-8">"作为轻奢男装品牌，我们对视觉质感要求极高。StyleAI Pro的虚拟模特和生图功能，让我们的产品展示更具一致性和高级感，转化率提升明显。"</p>
+          <div class="flex items-center">
+            <img src="https://picsum.photos/id/65/100/100" alt="客户头像" class="w-14 h-14 rounded-full object-cover mr-5">
+            <div>
+              <h4 class="font-montserrat font-semibold">李先生</h4>
+              <p class="text-secondary text-sm font-light">轻奢男装品牌总监</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 评价3 -->
+        <div class="bg-neutral rounded-2xl p-8 shadow-soft hover:shadow-hover hover-lift">
+          <div class="text-accent mb-6">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+          </div>
+          <p class="text-secondary font-light mb-8">"StyleAI Pro的带货视频生成功能非常实用，操作简单但效果专业，为我们节省了大量的视频制作时间，生成的内容在各大平台表现都很出色。"</p>
+          <div class="flex items-center">
+            <img src="https://picsum.photos/id/91/100/100" alt="客户头像" class="w-14 h-14 rounded-full object-cover mr-5">
+            <div>
+              <h4 class="font-montserrat font-semibold">王女士</h4>
+              <p class="text-secondary text-sm font-light">设计师品牌营销总监</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 常见问题（高级折叠面板） -->
+  <section id="faq" class="py-24 bg-neutral">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+      <div class="text-center max-w-2xl mx-auto mb-18">
+        <span class="inline-block px-4 py-1.5 bg-primary/5 text-primary rounded-full text-xs font-medium mb-5 tracking-wider">常见问题</span>
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-montserrat font-bold text-neutral-dark mb-6">您可能关心的问题</h2>
+        <p class="text-secondary text-lg font-light">关于StyleAI Pro平台的详细解答</p>
+      </div>
+      
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-5">
+          <!-- 问题1 -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden">
+            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+              <span class="font-montserrat font-semibold text-base">AI生成的内容是否具备商业版权？</span>
+              <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary font-light text-sm">是的，所有通过StyleAI Pro生成的视觉内容，您将获得完整的商业使用权。我们的AI模型经过合规训练，生成内容不涉及任何版权纠纷，可安全用于品牌宣传、电商销售等各类商业场景。</p>
+            </div>
+          </div>
+          
+          <!-- 问题2 -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden">
+            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+              <span class="font-montserrat font-semibold text-base">如何确保生成内容符合品牌风格？</span>
+              <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary font-light text-sm">平台支持品牌风格定制功能，您可以上传品牌参考图、设定色彩规范和设计语言，AI将学习并匹配您的品牌风格。专业版及以上用户还可享受专属风格训练服务，确保生成内容与品牌调性高度一致。</p>
+            </div>
+          </div>
+          
+          <!-- 问题3 -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden">
+            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+              <span class="font-montserrat font-semibold text-base">生成内容的质量如何保证？</span>
+              <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary font-light text-sm">我们采用行业领先的AI视觉模型，针对服装行业进行专项优化，能够精准还原面料质感、剪裁细节和光影效果。每个生成任务会提供3-5个版本供选择，同时支持多轮优化调整，确保最终效果满足高端品牌需求。</p>
+            </div>
+          </div>
+          
+          <!-- 问题4 -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden">
+            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+              <span class="font-montserrat font-semibold text-base">平台的数据安全如何保障？</span>
+              <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary font-light text-sm">我们采用银行级数据加密技术，所有用户上传的素材和生成的内容均受到严格保护。数据存储符合国家信息安全等级保护三级标准，企业版用户可享受专属数据隔离服务，确保品牌信息和设计资料不会泄露。</p>
+            </div>
+          </div>
+          
+          <!-- 问题5 -->
+          <div class="bg-white rounded-xl shadow-soft overflow-hidden">
+            <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
+              <span class="font-montserrat font-semibold text-base">是否提供技术支持和培训服务？</span>
+              <i class="fa fa-plus text-primary transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content hidden px-6 pb-6">
+              <p class="text-secondary font-light text-sm">所有用户均可享受7×12小时在线客服支持，专业版用户可获得专属技术顾问服务，企业版用户配备一对一客户经理。我们还提供详细的使用教程、视频培训和定期线上分享会，帮助您快速掌握平台功能，最大化发挥AI工具的价值。</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-16 text-center">
+          <p class="text-secondary font-light mb-6">还有其他疑问？</p>
+          <a href="#" class="inline-flex items-center px-7 py-3 bg-white text-primary font-medium rounded-lg shadow-soft hover:shadow-hover transition-all border border-primary/10 text-sm">
+            联系专业顾问 <i class="fa fa-headphones ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 行动召唤（高级质感） -->
+  <section class="py-24 bg-primary relative overflow-hidden">
+    <div class="absolute inset-0 opacity-15">
+      <img src="https://picsum.photos/id/1048/1920/1080" alt="" class="w-full h-full object-cover">
+    </div>
+    <div class="container mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+      <div class="max-w-3xl mx-auto text-center text-white">
+        <h2 class="text-[clamp(2rem,5vw,3rem)] font-montserrat font-bold mb-6">开启服装视觉升级之旅</h2>
+        <p class="text-white/80 text-lg mb-12 font-light max-w-2xl mx-auto">与全球高端服装品牌一同，借助AI技术打造差异化视觉体验，提升品牌价值与市场竞争力</p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-5">
+          <a href="#" class="w-full sm:w-auto px-8 py-3.5 bg-accent text-white rounded-lg text-base font-medium hover:bg-accent/90 transition-all shadow-soft hover:shadow-hover">
+            免费试用14天 <i class="fa fa-rocket ml-2"></i>
+          </a>
+          <a href="#" class="w-full sm:w-auto px-8 py-3.5 bg-white/10 bg-blur text-white rounded-lg text-base font-medium hover:bg-white/20 transition-all border border-white/20 flex items-center justify-center">
+            <i class="fa fa-calendar-check-o mr-2"></i> 预约演示
+          </a>
+        </div>
+        <p class="text-white/60 mt-8 text-sm font-light">无需信用卡 · 随时取消 · 无隐藏费用</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚（高级简约风格） -->
+  <footer class="bg-neutral-dark text-white pt-18 pb-10">
+    <div class="container mx-auto px-6 md:px-12 lg:px-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+        <div class="lg:col-span-2">
+          <a href="#" class="flex items-center space-x-3 mb-8">
+            <div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
+              <i class="fa fa-diamond text-primary text-xl"></i>
+            </div>
+            <span class="text-2xl font-montserrat font-bold text-white">StyleAI Pro</span>
+          </a>
+          <p class="text-white/70 mb-8 max-w-md font-light">StyleAI Pro是高端服装行业专属的AI视觉解决方案提供商，致力于通过人工智能技术，为品牌创造更高效、更优质的视觉内容体验。</p>
+          <div class="flex space-x-5">
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors">
+              <i class="fa fa-weixin"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors">
+              <i class="fa fa-weibo"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-accent transition-colors">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-montserrat font-semibold mb-8">产品</h4>
+          <ul class="space-y-4">
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">AI生图</a></li>
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">视频生成</a></li>
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">虚拟模特</a></li>
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">智能编辑</a></li>
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">电商适配</a></li>
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">定价方案</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-montserrat font-semibold mb-8">资源</h4>
+          <ul class="space-y-4">
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">帮助中心</a></li>
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">教程指南</a></li>
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">案例研究</a></li>
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">行业洞察</a></li>
+            <li><a href="#" class="text-white/70 hover:text-accent transition-colors text-sm font-light">API文档</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-montserrat font-semibold mb-8">联系我们</h4>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <i class="fa fa-envelope text-accent mt-1 mr-3"></i>
+              <span class="text-white/70 text-sm font-light">contact@styleaipro.com</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-phone text-accent mt-1 mr-3"></i>
+              <span class="text-white/70 text-sm font-light">400-888-9999</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-map-marker text-accent mt-1 mr-3"></i>
+              <span class="text-white/70 text-sm font-light">上海市静安区南京西路1266号恒隆广场46楼</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-white/10 pt-10">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-white/50 text-sm font-light mb-6 md:mb-0">© 2025 StyleAI Pro. 保留所有权利。</p>
+          <div class="flex space-x-8">
+            <a href="#" class="text-white/50 hover:text-white text-sm font-light">隐私政策</a>
+            <a href="#" class="text-white/50 hover:text-white text-sm font-light">服务条款</a>
+            <a href="#" class="text-white/50 hover:text-white text-sm font-light">Cookie政策</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-primary/95', 'bg-blur', 'shadow-soft');
+        navbar.classList.remove('bg-transparent');
+      } else {
+        navbar.classList.remove('bg-primary/95', 'bg-blur', 'shadow-soft');
+        navbar.classList.add('bg-transparent');
+      }
+    });
+    
+    // 移动端菜单切换
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // FAQ折叠功能
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('i');
+        
+        content.classList.toggle('hidden');
+        icon.classList.toggle('rotate-45');
+        
+        // 关闭其他打开的FAQ
+        document.querySelectorAll('.faq-toggle').forEach(otherToggle => {
+          if (otherToggle !== toggle) {
+            const otherContent = otherToggle.nextElementSibling;
+            const otherIcon = otherToggle.querySelector('i');
             
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
+            if (!otherContent.classList.contains('hidden')) {
+              otherContent.classList.add('hidden');
+              otherIcon.classList.remove('rotate-45');
+            }
+          }
         });
-    </script>
+      });
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+          
+          // 关闭移动端菜单
+          document.getElementById('mobile-menu').classList.add('hidden');
+        }
+      });
+    });
+    
+    // 数字计数器动画
+    function animateCounter(element, target, duration = 2500) {
+      let start = 0;
+      const increment = target / (duration / 16);
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          clearInterval(timer);
+          element.textContent = target + (element.id === 'counter4' ? '%' : '+');
+        } else {
+          element.textContent = Math.floor(start) + (element.id === 'counter4' ? '%' : '+');
+        }
+      }, 16);
+    }
+    
+    // 监听元素是否进入视口
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.id === 'counter1') animateCounter(entry.target, 800);
+          if (entry.target.id === 'counter2') animateCounter(entry.target, 250000);
+          if (entry.target.id === 'counter3') animateCounter(entry.target, 45000);
+          if (entry.target.id === 'counter4') animateCounter(entry.target, 98);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    // 观察计数器元素
+    document.querySelectorAll('[id^="counter"]').forEach(counter => {
+      observer.observe(counter);
+    });
+  </script>
 </body>
-
 </html>
